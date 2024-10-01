@@ -1,43 +1,224 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+         xsi:schemaLocation="
+           http://maven.apache.org/POM/4.0.0
+           http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <!-- Project Coordinates -->
     <modelVersion>4.0.0</modelVersion>
+    <groupId>com.ravesql</groupId> <!-- Replace with your groupId -->
+    <artifactId>ravesql</artifactId> <!-- Replace with your artifactId -->
+    <version>1.0.0</version> <!-- Replace with your version -->
+    <packaging>jar</packaging>
 
-    <groupId>com.ravesql</groupId>
-    <artifactId>core</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <!-- Project Information -->
+    <name>RaveSQL</name>
+    <description>
+        A high-performance SQL repository for Spring applications, ensuring seamless and energetic database interactions.
+    </description>
+    <url>https://ravesql.com</url>
 
-    <properties>
-        <maven.compiler.source>17</maven.compiler.source>
-        <maven.compiler.target>17</maven.compiler.target>
-    </properties>
-    
+    <!-- Licensing -->
+    <licenses>
+        <license>
+            <name>Apache License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <!-- Developers -->
+    <developers>
+        <developer>
+            <id>michal@ravesql.com</id> 
+            <name>Michal Wojewodzki</name>
+            <email>michal@ravesql.com</email>
+            <url>https://github.com/hardrave</url>
+        </developer>
+    </developers>
+
+    <!-- SCM Information -->
+    <scm>
+        <connection>scm:git:git://github.com/hardrave/RaveSQL.git</connection>
+        <developerConnection>scm:git:ssh://github.com:hardrave/RaveSQL.git</developerConnection> 
+        <url>https://github.com/hardrave/RaveSQL</url>
+    </scm>
+
+    <!-- Issue Management -->
+    <issueManagement>
+        <system>GitHub Issues</system>
+        <url>https://github.com/hardrave/RaveSQL/issues</url>
+    </issueManagement>
+
+    <!-- Dependency Management -->
+    <dependencyManagement>
+        <dependencies>
+            <!-- Spring Framework BOM -->
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-framework-bom</artifactId>
+                <version>5.3.27</version> 
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <!-- JUnit BOM -->
+            <dependency>
+                <groupId>org.junit</groupId>
+                <artifactId>junit-bom</artifactId>
+                <version>5.9.3</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <!-- Dependencies -->
     <dependencies>
+        <!-- Spring JDBC -->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-jdbc</artifactId>
-            <version>5.3.10</version>
+            <!-- Version managed by Spring BOM -->
+            <scope>provided</scope> 
         </dependency>
-         <dependency>
-    <groupId>org.junit.jupiter</groupId>
-    <artifactId>junit-jupiter-engine</artifactId>
-    <version>5.8.1</version>
-    <scope>test</scope>
-    </dependency>
-    <dependency>
 
-    <groupId>com.h2database</groupId>
+        <!-- JUnit Jupiter Engine -->
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <!-- Version managed by JUnit BOM -->
+            <scope>test</scope>
+        </dependency>
 
-    <artifactId>h2</artifactId>
-
-    <version>2.1.214</version>
-
-    <scope>test</scope>
-
-</dependency>
+        <!-- H2 Database for Testing -->
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <version>2.1.214</version> 
+            <scope>test</scope>
+        </dependency>
     </dependencies>
-   
 
+    <!-- Build Configuration -->
+    <build>
+        <plugins>
+            <!-- Maven Compiler Plugin -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.10.1</version>
+                <configuration>
+                    <source>11</source>
+                    <target>11</target>
+                    <release>11</release> 
+                </configuration>
+            </plugin>
+
+            <!-- Maven Surefire Plugin for Running Tests -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.0.0-M7</version>
+                <configuration>
+                    <includes>
+                        <include>**/*Test.java</include>
+                    </includes>
+                </configuration>
+            </plugin>
+
+            <!-- Maven Javadoc Plugin -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>3.4.0</version>
+                <executions>
+                    <execution>
+                        <id>attach-javadocs</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <source>11</source>
+                    <links>
+                        <link>https://docs.oracle.com/en/java/javase/11/docs/api/</link>
+                        <link>https://docs.spring.io/spring-framework/docs/5.3.27/javadoc-api/</link>
+                    </links>
+                    <docTitle>RaveRepository API Documentation</docTitle>
+                    <windowTitle>RaveRepository Javadocs</windowTitle>
+                    <failOnError>false</failOnError>
+                </configuration>
+            </plugin>
+
+            <!-- Maven Source Plugin -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>3.2.1</version>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!-- Maven GPG Plugin for Signing -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-gpg-plugin</artifactId>
+                <version>1.6</version>
+                <executions>
+                    <execution>
+                        <id>sign-artifacts</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>sign</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <gpg.keyname>${gpg.keyname}</gpg.keyname>
+                    <gpg.passphrase>${gpg.passphrase}</gpg.passphrase>
+                </configuration>
+            </plugin>
+            
+
+            <!-- Maven Central Publishing Plugin -->
+            <plugin>
+                <groupId>org.sonatype.central</groupId>
+                <artifactId>central-publishing-maven-plugin</artifactId>
+                <version>0.6.0</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <publishingServerId>central</publishingServerId>
+                </configuration>
+            </plugin>        
+            
+            <!-- Maven Deploy Plugin -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-deploy-plugin</artifactId>
+                <version>3.0.0-M1</version>
+            </plugin>
+
+            <!-- Maven Release Plugin (Optional) -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-release-plugin</artifactId>
+                <version>3.0.0-M5</version>
+            </plugin>
+        </plugins>
+    </build>
+
+    <!-- Properties -->
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.javadoc.skip>false</maven.javadoc.skip>
+    </properties>
 
 </project>
