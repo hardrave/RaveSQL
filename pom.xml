@@ -7,9 +7,9 @@
 
     <!-- Project Coordinates -->
     <modelVersion>4.0.0</modelVersion>
-    <groupId>com.ravesql</groupId> <!-- Replace with your groupId -->
-    <artifactId>ravesql</artifactId> <!-- Replace with your artifactId -->
-    <version>1.0.0</version> <!-- Replace with your version -->
+    <groupId>com.ravesql</groupId> 
+    <artifactId>ravesql</artifactId> 
+    <version>1.0.0</version> 
     <packaging>jar</packaging>
 
     <!-- Project Information -->
