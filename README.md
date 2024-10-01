@@ -1,53 +1,50 @@
-# 🖤 RaveSQL Documentation 🖤
+# 🔥 RaveSQL Documentation 🔥
 
 Welcome, fellow hardcore ravers, to the **RaveSQL** universe! Here, SQL queries and database updates drop like the sickest beats in a non-stop rave, keeping your app’s data in sync with the high-energy BPM of speedcore. 
 
-# Why RaveSQL?
+## Why RaveSQL?
 
-**Streamline Database Interactions:** Link your Java methods to SQL scripts seamlessly, reducing boilerplate and enhancing maintainability.
-
-**Automatic Result Mapping:** Automatically map SQL query results to your Java objects, making data handling as smooth as your favorite beats.
-
-**Comprehensive Querying & Updating:** Access a wide range of methods for querying and updating, ensuring all your data needs are met with high-energy efficiency.
-
-**Enhance Performance:** Utilize SQL caching for rapid query access, ensuring your application runs smoothly without missing a beat.
-
-**Reliable Error Handling:** Custom exceptions keep your data rave secure by managing errors gracefully.
+   - **Streamline Database Interactions:** Link your Java methods to SQL scripts seamlessly, reducing boilerplate and enhancing maintainability.
+   - **Automatic Result Mapping:** Automatically map SQL query results to your Java objects, making data handling as smooth as your favorite beats.
+   - **Comprehensive Querying & Updating:** Access a wide range of methods for querying and updating, ensuring all your data needs are met with high-energy efficiency.
+   - **Enhance Performance:** Utilize SQL caching for rapid query access, ensuring your application runs smoothly without missing a beat.
+   - **Reliable Error Handling:** Custom exceptions keep your data rave secure by managing errors gracefully.
 
 ---
-**Hardcore Never Dies!** 🖤
+**Hardcore Never Dies!** ⚡
+
 ---
 
-## 🌟 Table of Contents
 
+## 💥 Table of Contents
 
-1. [SqlPath Annotation](#the-core-annotation: @SqlPath)
-2. [The Main Stage: RaveRepository](#the-main-stage: RaveRepository)
-3. [Method Breakdown](#method-breakdown)
-   - [Query Methods](#query-methods)
-   - [Raw Query Methods](#raw-query-methods)
-   - [Query for Single Object](#query-for-single-object)
-   - [Raw Query for Single Object](#raw-query-for-single-object)
-   - [Update Methods](#update-methods)
-   - [Raw Update Methods](#raw-update-methods)
-   - [Batch Update](#batch-update)
-   - [Raw Batch Update](#raw-batch-update)
-   - [Preload SQL Queries](#preload-sql-queries)
-   - [Clear SQL Cache](#clear-sql-cache)
-4. [Error Handling](#error-handling)
-5. [Examples from the Rave Scene](#examples-from-the-rave-scene)
-6. [Afterparty](#afterparty)
+1. [SqlPath Annotation](#-the-core-annotation-sqlpath)
+2. [The Main Stage: RaveRepository](#-the-main-stage-raverepository)
+3. [Method Breakdown](#-method-breakdown)
+   - [Query Methods](#-query-methods)
+   - [Raw Query Methods](#-raw-query-methods)
+   - [Query for Single Object](#-query-for-single-object)
+   - [Raw Query for Single Object](#-raw-query-for-single-object)
+   - [Update Methods](#-update-methods)
+   - [Raw Update Methods](#-raw-update-methods)
+   - [Batch Update](#-batch-update)
+   - [Raw Batch Update](#-raw-batch-update)
+   - [Preload SQL Queries](#-preload-sql-queries)
+   - [Clear SQL Cache](#-clear-sql-cache)
+4. [Error Handling](#-error-handling)
+5. [Examples from the Rave Scene](#-examples-from-the-rave-scene)
+6. [Afterparty](#-afterparty)
 
 
 ---
 
-## 🌟 The Core Annotation: @SqlPath
+## 😈 The Core Annotation: @SqlPath
 
-### 🌈 Overview
+###  Overview
 
 **`@SqlPath`** is your backstage pass, linking your Java methods to their SQL scripts. Just like a DJ synchronizes tracks to maintain the rave's vibe, `@SqlPath` ensures your SQL queries are always in sync with your application's data flow.
 
-### 🎛️ Usage
+### Usage
 
 ```java
 import com.ravesql.annotations.SqlPath;
@@ -61,11 +58,11 @@ public class TrackService {
 }
 ```
 
-### 🎵 Parameters
+### Parameters
 
 - **`value`**: The relative path to your SQL file. Think of it as the playlist that keeps the rave alive.
 
-### 🎉 Example
+### Example
 
 Imagine you're spinning a set list for a gabber night. Each method in your service class corresponds to a specific SQL script that fetches or manipulates data:
 
@@ -76,11 +73,11 @@ public List<Track> bringTheHardcore();
 
 ---
 
-## 🎉 The Main Stage: `RaveRepository`
+## 🤘 The Main Stage: `RaveRepository`
 
 **RaveRepository** is the lifeblood of your data interactions, ensuring your application grooves seamlessly with the database. Whether you're querying tracks, updating rave schedules, or managing ravers, RaveRepository keeps everything in harmony with the relentless energy of a hardcore rave.
 
-### 🔥 Key Features
+### Key Features
 
 - **SQL Caching**: Keeps your SQL scripts ready to drop like your favorite tracks.
 - **Flexible Querying**: Supports both annotated and raw SQL queries.
@@ -89,15 +86,15 @@ public List<Track> bringTheHardcore();
 
 ---
 
-## 🎧 Method Breakdown
+## 💣 Method Breakdown
 
 Let's break down each method in RaveRepository, ensuring you know how to keep your data rave lit!
 
-### 🎶 Query Methods
+### Query Methods
 
 **Purpose**: Retrieve lists of objects from the database based on your SQL queries.
 
-#### 🕺 `query(Class<T> type, Object... keyValues)`
+#### `query(Class<T> type, Object... keyValues)`
 
 - **Description**: Executes a SQL query linked via `@SqlPath`, using key-value pairs as parameters.
 - **Example**:
@@ -109,7 +106,7 @@ Let's break down each method in RaveRepository, ensuring you know how to keep yo
     }
     ```
 
-#### 🎧 `query(Class<T> type, Object params)`
+#### `query(Class<T> type, Object params)`
 
 - **Description**: Executes a SQL query with a parameter object.
 - **Example**:
@@ -121,7 +118,7 @@ Let's break down each method in RaveRepository, ensuring you know how to keep yo
     }
     ```
 
-#### 🎤 `query(Class<T> type)`
+#### `query(Class<T> type)`
 
 - **Description**: Executes a SQL query without any parameters.
 - **Example**:
@@ -135,11 +132,11 @@ Let's break down each method in RaveRepository, ensuring you know how to keep yo
 
 ---
 
-### 🔥 Raw Query Methods
+### Raw Query Methods
 
 **Purpose**: Execute raw SQL queries by specifying the SQL path directly, giving you full control over the data flow.
 
-#### 🔥 `rawQuery(String sqlPath, Class<T> type, Object... keyValues)`
+#### `rawQuery(String sqlPath, Class<T> type, Object... keyValues)`
 
 - **Description**: Executes a raw SQL query with key-value pairs.
 - **Example**:
@@ -150,7 +147,7 @@ Let's break down each method in RaveRepository, ensuring you know how to keep yo
     }
     ```
 
-#### 🎧 `rawQuery(String sqlPath, Class<T> type, Object params)`
+#### `rawQuery(String sqlPath, Class<T> type, Object params)`
 
 - **Description**: Executes a raw SQL query with a parameter object.
 - **Example**:
@@ -161,7 +158,7 @@ Let's break down each method in RaveRepository, ensuring you know how to keep yo
     }
     ```
 
-#### 🎵 `rawQuery(String sqlPath, Class<T> type)`
+#### `rawQuery(String sqlPath, Class<T> type)`
 
 - **Description**: Executes a raw SQL query without any parameters.
 - **Example**:
@@ -174,11 +171,11 @@ Let's break down each method in RaveRepository, ensuring you know how to keep yo
 
 ---
 
-### 🌟 Query for Single Object
+### Query for Single Object
 
 **Purpose**: Retrieve a single object from the database that matches the query parameters.
 
-#### 🎯 `queryForObject(Class<T> type, Object... keyValues)`
+#### `queryForObject(Class<T> type, Object... keyValues)`
 
 - **Description**: Executes a SQL query to fetch a single object using key-value pairs.
 - **Example**:
@@ -190,7 +187,7 @@ Let's break down each method in RaveRepository, ensuring you know how to keep yo
     }
     ```
 
-#### 🎧 `queryForObject(Class<T> type, Object params)`
+#### `queryForObject(Class<T> type, Object params)`
 
 - **Description**: Executes a SQL query to fetch a single object with a parameter object.
 - **Example**:
@@ -202,7 +199,7 @@ Let's break down each method in RaveRepository, ensuring you know how to keep yo
     }
     ```
 
-#### 🕺 `queryForObject(Class<T> type)`
+#### `queryForObject(Class<T> type)`
 
 - **Description**: Executes a SQL query to fetch a single object without any parameters.
 - **Example**:
@@ -216,11 +213,11 @@ Let's break down each method in RaveRepository, ensuring you know how to keep yo
 
 ---
 
-### 🔄 Raw Query for Single Object
+### Raw Query for Single Object
 
 **Purpose**: Execute raw SQL queries to retrieve a single object, offering precise control over data selection.
 
-#### 🎛️ `rawQueryForObject(String sqlPath, Class<T> type, Object... keyValues)`
+#### `rawQueryForObject(String sqlPath, Class<T> type, Object... keyValues)`
 
 - **Description**: Executes a raw SQL query to fetch a single object using key-value pairs.
 - **Example**:
@@ -231,7 +228,7 @@ Let's break down each method in RaveRepository, ensuring you know how to keep yo
     }
     ```
 
-#### 🎚️ `rawQueryForObject(String sqlPath, Class<T> type, Object params)`
+#### `rawQueryForObject(String sqlPath, Class<T> type, Object params)`
 
 - **Description**: Executes a raw SQL query to fetch a single object with a parameter object.
 - **Example**:
@@ -242,7 +239,7 @@ Let's break down each method in RaveRepository, ensuring you know how to keep yo
     }
     ```
 
-#### 🎤 `rawQueryForObject(String sqlPath, Class<T> type)`
+#### `rawQueryForObject(String sqlPath, Class<T> type)`
 
 - **Description**: Executes a raw SQL query to fetch a single object without any parameters.
 - **Example**:
@@ -255,11 +252,11 @@ Let's break down each method in RaveRepository, ensuring you know how to keep yo
 
 ---
 
-### 🔄 Update Methods
+### Update Methods
 
 **Purpose**: Perform update operations on the database, modifying records to keep your data rave synchronized.
 
-#### 🔥 `update(Object... keyValues)`
+#### `update(Object... keyValues)`
 
 - **Description**: Executes an update operation using key-value pairs.
 - **Example**:
@@ -271,7 +268,7 @@ Let's break down each method in RaveRepository, ensuring you know how to keep yo
     }
     ```
 
-#### 🔧 `update(Object params)`
+#### `update(Object params)`
 
 - **Description**: Executes an update operation with a parameter object.
 - **Example**:
@@ -283,7 +280,7 @@ Let's break down each method in RaveRepository, ensuring you know how to keep yo
     }
     ```
 
-#### 🌐 `update()`
+#### `update()`
 
 - **Description**: Executes an update operation without any parameters.
 - **Example**:
@@ -297,11 +294,11 @@ Let's break down each method in RaveRepository, ensuring you know how to keep yo
 
 ---
 
-### 🔥 Raw Update Methods
+### Raw Update Methods
 
 **Purpose**: Execute raw update operations by specifying the SQL path directly, offering full control over data modifications.
 
-#### 🔥 `rawUpdate(String sqlPath, Object... keyValues)`
+#### `rawUpdate(String sqlPath, Object... keyValues)`
 
 - **Description**: Executes a raw update operation using key-value pairs.
 - **Example**:
@@ -312,7 +309,7 @@ Let's break down each method in RaveRepository, ensuring you know how to keep yo
     }
     ```
 
-#### 🔩 `rawUpdate(String sqlPath, Object params)`
+#### `rawUpdate(String sqlPath, Object params)`
 
 - **Description**: Executes a raw update operation with a parameter object.
 - **Example**:
@@ -323,7 +320,7 @@ Let's break down each method in RaveRepository, ensuring you know how to keep yo
     }
     ```
 
-#### 🎚️ `rawUpdate(String sqlPath)`
+#### `rawUpdate(String sqlPath)`
 
 - **Description**: Executes a raw update operation without any parameters.
 - **Example**:
@@ -336,11 +333,11 @@ Let's break down each method in RaveRepository, ensuring you know how to keep yo
 
 ---
 
-### 🎉 Batch Update
+### Batch Update
 
 **Purpose**: Perform batch updates to modify multiple records in one synchronized drop, keeping the rave energy high.
 
-#### 🎉 `batchUpdate(List<?> paramObjects)`
+#### `batchUpdate(List<?> paramObjects)`
 
 - **Description**: Executes a batch update using a list of parameter objects.
 - **Example**:
@@ -354,11 +351,11 @@ Let's break down each method in RaveRepository, ensuring you know how to keep yo
 
 ---
 
-### 🔁 Raw Batch Update
+### Raw Batch Update
 
 **Purpose**: Execute raw batch updates with precise control over each data modification.
 
-#### 🔁 `rawBatchUpdate(String sqlPath, List<?> paramObjects)`
+#### `rawBatchUpdate(String sqlPath, List<?> paramObjects)`
 
 - **Description**: Executes a raw batch update using a list of parameter objects.
 - **Example**:
@@ -371,11 +368,11 @@ Let's break down each method in RaveRepository, ensuring you know how to keep yo
 
 ---
 
-### 🚀 Preload SQL Queries
+### Preload SQL Queries
 
 **Purpose**: Preload a list of SQL queries into the cache, ensuring your favorite tracks are always ready to drop without delay.
 
-#### 🚀 `preloadSqlQueries(List<String> sqlPaths)`
+#### `preloadSqlQueries(List<String> sqlPaths)`
 
 - **Description**: Loads multiple SQL scripts into the cache.
 - **Example**:
@@ -393,11 +390,11 @@ Let's break down each method in RaveRepository, ensuring you know how to keep yo
 
 ---
 
-### 🧹 Clear SQL Cache
+### Clear SQL Cache
 
 **Purpose**: Clears the SQL cache, allowing you to refresh your playlist and ensure the latest queries are always in sync with your application's needs.
 
-#### 🧹 `clearSqlCache()`
+#### `clearSqlCache()`
 
 - **Description**: Empties the SQL cache.
 - **Example**:
@@ -410,11 +407,11 @@ Let's break down each method in RaveRepository, ensuring you know how to keep yo
 
 ---
 
-## 🛡️ Error Handling
+## 💀 Error Handling
 
 At the heart of every rave, there are bouncers ensuring everything runs smoothly. Similarly, **RaveRepository** comes equipped with **`SqlRepositoryException`**, your custom unchecked exception to handle any hiccups during data interactions.
 
-### 🎟️ `SqlRepositoryException`
+### `SqlRepositoryException`
 
 - **Usage**: Thrown when there's an issue with SQL queries or parameters.
 - **Scenarios**:
@@ -422,7 +419,7 @@ At the heart of every rave, there are bouncers ensuring everything runs smoothly
   - Errors reading SQL scripts.
   - Invalid query parameters.
 
-### 🎤 Example
+### Example
 
 ```java
 public Raver getRaverById(int id) {
@@ -438,11 +435,11 @@ public Raver getRaverById(int id) {
 
 ---
 
-## 🎉 Examples from the Rave Scene
+## 🎶 Examples from the Rave Scene
 
 Let's translate some real-world rave scenarios into RaveRepository operations!
 
-### 🌈 Example 1: Fetching Tracks by BPM
+### Example 1: Fetching Tracks by BPM
 
 **Scenario**: You're curating a setlist for a hardcore rave and need tracks with specific BPMs.
 
@@ -459,7 +456,7 @@ public List<Track> getTracksByBPM(int bpm) {
 SELECT * FROM tracks WHERE bpm = :bpm;
 ```
 
-### 🌟 Example 2: Updating Festival Information
+### Example 2: Updating Festival Information
 
 **Scenario**: A festival updates their profile with new social media handles.
 
@@ -478,7 +475,7 @@ SET twitter = :twitter, instagram = :instagram
 WHERE id = :id;
 ```
 
-### 🎤 Example 3: Preloading SQL Queries Before the Rave
+### Example 3: Preloading SQL Queries Before the Rave
 
 **Scenario**: Before the rave starts, preload essential SQL scripts to ensure no delays during the event.
 
@@ -495,9 +492,11 @@ public void prepareRaveNight() {
 
 ---
 
-## 🎉 Afterparty
+## 🖤 Afterparty
 
-With **RaveSQL**, your data will always be in sync with the pulsating energy of your app’s backend. Embrace the spirit of PLUR, keep your queries clean, your updates efficient, and your data rave alive. Always remember: **Hardcore Never Dies!**
+With **RaveSQL**, your data will always be in sync with the pulsating energy of your app’s backend. Embrace the spirit of PLUR, keep your queries clean, your updates efficient, and your data rave alive. 
+
+Always remember: **Hardcore Never Dies!**
 
 ---
 
