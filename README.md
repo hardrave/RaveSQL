@@ -5,9 +5,13 @@ Welcome, fellow hardcore ravers, to the **RaveSQL** universe! Here, SQL queries 
 # Why RaveSQL?
 
 **Streamline Database Interactions:** Link your Java methods to SQL scripts seamlessly, reducing boilerplate and enhancing maintainability.
+
 **Automatic Result Mapping:** Automatically map SQL query results to your Java objects, making data handling as smooth as your favorite beats.
+
 **Comprehensive Querying & Updating:** Access a wide range of methods for querying and updating, ensuring all your data needs are met with high-energy efficiency.
+
 **Enhance Performance:** Utilize SQL caching for rapid query access, ensuring your application runs smoothly without missing a beat.
+
 **Reliable Error Handling:** Custom exceptions keep your data rave secure by managing errors gracefully.
 
 ---
