@@ -15,12 +15,25 @@ Welcome, fellow hardcore ravers, to the **RaveSQL** universe! Here, SQL queries 
 
 ---
 
-
 ## 💥 Table of Contents
 
-1. [SqlPath Annotation](#-the-core-annotation-sqlpath)
-2. [The Main Stage: RaveRepository](#-the-main-stage-raverepository)
-3. [Method Breakdown](#-method-breakdown)
+### Updated Table of Contents
+
+1. [Why RaveSQL?](#why-ravesql)
+2. [Drop the Bass with Maven](#drop-the-bass-with-maven)
+   - [Add the RaveSQL Dependency](#1-add-the-ravesql-dependency)
+   - [Import RaveSQL into Your Project](#2-import-ravesql-into-your-project)
+   - [Inject RaveRepository with Spring’s Autowire](#3-inject-raverepository-with-springs-autowire)
+3. [Gradle Integration: Spin Those Beats with build.gradle](#gradle-integration-spin-those-beats-with-buildgradle)
+   - [Add the RaveSQL Dependency](#1-add-the-ravesql-dependency-1)
+   - [Import RaveSQL into Your Project](#2-import-ravesql-into-your-project-1)
+   - [Inject RaveRepository with Spring’s Autowire](#3-inject-raverepository-with-springs-autowire-1)
+4. [Example Usage: Keep the Data Flowing Like a Non-Stop Rave](#example-usage-keep-the-data-flowing-like-a-non-stop-rave)
+   - [Preload Your SQL Tracks](#preload-your-sql-tracks)
+   - [Clear the SQL Cache When Needed](#clear-the-sql-cache-when-needed)
+5. [The Core Annotation: @SqlPath](#-the-core-annotation-sqlpath)
+6. [The Main Stage: RaveRepository](#-the-main-stage-raverepository)
+7. [Method Breakdown](#-method-breakdown)
    - [Query Methods](#-query-methods)
    - [Raw Query Methods](#-raw-query-methods)
    - [Query for Single Object](#-query-for-single-object)
@@ -31,14 +44,17 @@ Welcome, fellow hardcore ravers, to the **RaveSQL** universe! Here, SQL queries 
    - [Raw Batch Update](#-raw-batch-update)
    - [Preload SQL Queries](#-preload-sql-queries)
    - [Clear SQL Cache](#-clear-sql-cache)
-4. [Error Handling](#-error-handling)
-5. [Examples from the Rave Scene](#-examples-from-the-rave-scene)
-6. [Afterparty](#-afterparty)
+8. [Error Handling](#-error-handling)
+9. [Examples from the Rave Scene](#-examples-from-the-rave-scene)
+   - [Example 1: Fetching Tracks by BPM](#example-1-fetching-tracks-by-bpm)
+   - [Example 2: Updating Festival Information](#example-2-updating-festival-information)
+   - [Example 3: Preloading SQL Queries Before the Rave](#example-3-preloading-sql-queries-before-the-rave)
+10. [Afterparty](#-afterparty)
 
 
 ---
 
-## Drop the Bass with Maven 
+## 🎇 Drop the Bass with Maven 
 ---
 
 ### 1. Add the RaveSQL Dependency
@@ -90,7 +106,7 @@ public class PartyRepository {
 
 ---
 
-## Gradle Integration: Spin Those Beats with build.gradle
+## 👾 Gradle Integration: Spin Those Beats with build.gradle
 ---
 ### 1. Add the RaveSQL Dependency
 
