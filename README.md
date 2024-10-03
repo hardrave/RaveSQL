@@ -38,6 +38,184 @@ Welcome, fellow hardcore ravers, to the **RaveSQL** universe! Here, SQL queries 
 
 ---
 
+## Drop the Bass with Maven 
+---
+
+### 1. Add the RaveSQL Dependency
+
+Just like adding the hottest track to your rave playlist, include RaveSQL in your `pom.xml` to keep the party going:
+
+```xml
+<dependency>
+    <groupId>com.ravesql</groupId>
+    <artifactId>ravesql</artifactId>
+    <version>1.0.0</version>
+</dependency>
+```
+
+### 2. Import RaveSQL into Your Project
+
+Bring in the RaveSQL vibes by importing the necessary classes into your Java files:
+
+```java
+import com.ravesql.RaveRepository;
+import com.ravesql.annotation.SqlPath;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+```
+
+### 3. Inject RaveRepository with Spring’s Autowire
+
+Let RaveRepository be the DJ that mixes your data seamlessly. Inject it into your service class using Spring’s `@Autowired` or constructor injection:
+
+```java
+@Repository
+public class PartyRepository {
+
+    private final RaveRepository raveRepository;
+
+    @Autowired
+    public PartyRepository(RaveRepository raveRepository) {
+        this.raveRepository = raveRepository;
+    }
+
+    @SqlPath("sql/getPartyTracksByGenre.sql")
+    public List<Track> getPartyTracks(String genre) {
+        return raveRepository.query(Track.class, "genre", genre);
+    }
+}
+```
+
+✨ **Pro Tip:** Use the `@SqlPath` annotation to link your methods to their SQL scripts, ensuring every query hits the dancefloor with precision!
+
+---
+
+## Gradle Integration: Spin Those Beats with build.gradle
+---
+### 1. Add the RaveSQL Dependency
+
+Inject some hardcore energy into your `build.gradle` by adding RaveSQL to your dependencies:
+
+```groovy
+dependencies {
+    implementation 'com.ravesql:ravesql:1.0.0'
+}
+```
+
+### 2. Import RaveSQL into Your Project
+
+Sync your project’s rhythm by importing RaveSQL classes:
+
+```java
+import com.ravesql.RaveRepository;
+import com.ravesql.annotation.SqlPath;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+```
+
+### 3. Inject RaveRepository with Spring’s Autowire
+
+Let RaveRepository handle your data flows like a speedcore beat. Inject it into your service class:
+
+```java
+@Repository
+public class BeatRepository {
+
+    private final RaveRepository raveRepository;
+
+    @Autowired
+    public BeatRepository(RaveRepository raveRepository) {
+        this.raveRepository = raveRepository;
+    }
+
+    @SqlPath("sql/getBeatDetails.sql")
+    public BeatDetails getBeatDetails(int beatId) {
+        return raveRepository.queryForObject(BeatDetails.class, "id", beatId);
+    }
+}
+```
+
+✨ **Pro Tip:** Keep your SQL scripts ready and let `@SqlPath` guide your methods to execute queries without missing a beat!
+
+---
+
+## Example Usage: Keep the Data Flowing Like a Non-Stop Rave 
+
+Here’s how you can harness the power of RaveSQL in your application:
+
+```java
+@Repository
+public class TrackRepository {
+
+    private final RaveRepository raveRepository;
+
+    @Autowired
+    public TrackRepository(RaveRepository raveRepository) {
+        this.raveRepository = raveRepository;
+    }
+
+    @SqlPath("sql/getTracks.sql")
+    public List<DanceMove> getTracksByStyle(String style) {
+        return raveRepository.query(Tracks.class, "style", style);
+    }
+
+    @SqlPath("sql/insertTrack.sql")
+    public int addTrack(Track track) {
+        return raveRepository.update(track);
+    }
+
+    @SqlPath("sql/updateTrack.sql")
+    public int update(int bpm) {
+        return raveRepository.update("bpm", bpm);
+    }
+
+    @SqlPath("sql/deleteTrack.sql")
+    public int deleteTrack(int trackId) {
+        return raveRepository.update("trackId", trackId);
+    }
+}
+```
+
+###  Preload Your SQL Tracks
+
+Before the rave starts, preload your SQL queries to ensure everything runs smoothly:
+
+```java
+@Component
+public class RaveInitializer {
+
+    private final RaveRepository raveRepository;
+
+    @Autowired
+    public RaveInitializer(RaveRepository raveRepository) {
+        this.raveRepository = raveRepository;
+        preloadQueries();
+    }
+
+    private void preloadQueries() {
+        raveRepository.preloadSqlQueries(List.of(
+            "sql/getTracks.sql",
+            "sql/insertTrack.sql",
+            "sql/updateTrack.sql",
+            "sql/deleteTrack.sql"
+        ));
+    }
+}
+```
+
+###  Clear the SQL Cache When Needed
+
+Need to refresh the playlist? Clear the SQL cache effortlessly:
+
+```java
+public void refreshPlaylist() {
+    raveRepository.clearSqlCache();
+    preloadQueries();
+}
+```
+
+---
+
 ## 😈 The Core Annotation: @SqlPath
 
 ###  Overview
