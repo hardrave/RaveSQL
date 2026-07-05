@@ -58,7 +58,7 @@
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-framework-bom</artifactId>
-                <version>5.3.27</version> 
+                <version>5.3.39</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -66,7 +66,7 @@
             <dependency>
                 <groupId>org.junit</groupId>
                 <artifactId>junit-bom</artifactId>
-                <version>5.9.3</version>
+                <version>5.14.4</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -95,7 +95,7 @@
         <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
-            <version>2.1.214</version> 
+            <version>2.4.240</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
@@ -107,7 +107,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.10.1</version>
+                <version>3.15.0</version>
                 <configuration>
                     <source>11</source>
                     <target>11</target>
@@ -119,7 +119,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>3.0.0-M7</version>
+                <version>3.5.6</version>
                 <configuration>
                     <includes>
                         <include>**/*Test.java</include>
@@ -144,7 +144,7 @@
                     <source>11</source>
                     <links>
                         <link>https://docs.oracle.com/en/java/javase/11/docs/api/</link>
-                        <link>https://docs.spring.io/spring-framework/docs/5.3.27/javadoc-api/</link>
+                        <link>https://docs.spring.io/spring-framework/docs/5.3.39/javadoc-api/</link>
                     </links>
                     <docTitle>RaveRepository API Documentation</docTitle>
                     <windowTitle>RaveRepository Javadocs</windowTitle>

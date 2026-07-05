@@ -5,7 +5,7 @@ Welcome, fellow hardcore ravers, to the **RaveSQL** universe! Here, SQL queries 
 ## Why RaveSQL?
 
    - **Streamline Database Interactions:** Link your Java methods to SQL scripts seamlessly, reducing boilerplate and enhancing maintainability.
-   - **Automatic Result Mapping:** Automatically map SQL query results to your Java objects, making data handling as smooth as your favorite beats.
+   - **Automatic Result Mapping:** Automatically map SQL query results to your Java objects, making data handling as smooth as your favorite beats. Columns that don't match your field names? Alias them with `@Column` — JPA's `@Column` annotations are recognized too.
    - **Comprehensive Querying & Updating:** Access a wide range of methods for querying and updating, ensuring all your data needs are met with high-energy efficiency.
    - **Enhance Performance:** Utilize SQL caching for rapid query access, ensuring your application runs smoothly without missing a beat.
    - **Reliable Error Handling:** Custom exceptions keep your data rave secure by managing errors gracefully.
@@ -32,8 +32,9 @@ Welcome, fellow hardcore ravers, to the **RaveSQL** universe! Here, SQL queries 
    - [Preload Your SQL Tracks](#preload-your-sql-tracks)
    - [Clear the SQL Cache When Needed](#clear-the-sql-cache-when-needed)
 5. [The Core Annotation: @SqlPath](#-the-core-annotation-sqlpath)
-6. [The Main Stage: RaveRepository](#-the-main-stage-raverepository)
-7. [Method Breakdown](#-method-breakdown)
+6. [The Alias Annotation: @Column](#-the-alias-annotation-column)
+7. [The Main Stage: RaveRepository](#-the-main-stage-raverepository)
+8. [Method Breakdown](#-method-breakdown)
    - [Query Methods](#-query-methods)
    - [Raw Query Methods](#-raw-query-methods)
    - [Query for Single Object](#-query-for-single-object)
@@ -44,12 +45,12 @@ Welcome, fellow hardcore ravers, to the **RaveSQL** universe! Here, SQL queries 
    - [Raw Batch Update](#-raw-batch-update)
    - [Preload SQL Queries](#-preload-sql-queries)
    - [Clear SQL Cache](#-clear-sql-cache)
-8. [Error Handling](#-error-handling)
-9. [Examples from the Rave Scene](#-examples-from-the-rave-scene)
+9. [Error Handling](#-error-handling)
+10. [Examples from the Rave Scene](#-examples-from-the-rave-scene)
    - [Example 1: Fetching Tracks by BPM](#example-1-fetching-tracks-by-bpm)
    - [Example 2: Updating Festival Information](#example-2-updating-festival-information)
    - [Example 3: Preloading SQL Queries Before the Rave](#example-3-preloading-sql-queries-before-the-rave)
-10. [Afterparty](#-afterparty)
+11. [Afterparty](#-afterparty)
 
 
 ---
@@ -241,7 +242,7 @@ public void refreshPlaylist() {
 ### Usage
 
 ```java
-import com.ravesql.annotations.SqlPath;
+import com.ravesql.annotation.SqlPath;
 
 public class TrackService {
 
@@ -264,6 +265,59 @@ Imagine you're spinning a set list for a gabber night. Each method in your servi
 @SqlPath("sql/bringTheHardcore.sql")
 public List<Track> bringTheHardcore();
 ```
+
+---
+
+## 🎭 The Alias Annotation: @Column
+
+### Overview
+
+Sometimes your database columns and your Java fields don't share the same stage name — the crowd knows the track as `mail_from`, but backstage it goes by `mailFrom`. **`@Column`** is the alias on the guest list: it maps an entity property to a differently-named column, and the mapping works **in both directions** — reading query results *and* binding named parameters (including batch updates).
+
+### Usage
+
+```java
+import com.ravesql.annotation.Column;
+
+public class Mail {
+
+    private int id;
+
+    @Column(name = "mail_from")
+    private String mailFrom;
+
+    // getters and setters
+}
+```
+
+Now both sides of the rave stay in sync:
+
+```sql
+-- sql/getMailById.sql : mail_from flows into mailFrom
+SELECT id, mail_from FROM mail_table WHERE id = :id;
+
+-- sql/insertMail.sql : :mail_from binds the mailFrom property
+INSERT INTO mail_table (id, mail_from) VALUES (:id, :mail_from);
+```
+
+```java
+@SqlPath("sql/getMailById.sql")
+public Mail getMailById(int id) {
+    return raveRepository.queryForObject(Mail.class, "id", id);
+}
+
+@SqlPath("sql/insertMail.sql")
+public int addMail(Mail mail) {
+    return raveRepository.update(mail);
+}
+```
+
+### The Details
+
+- **Field or getter** — drop `@Column` on either; both get you into the club.
+- **JPA guests welcome** 🎟️ — RaveSQL also recognizes `jakarta.persistence.Column` and `javax.persistence.Column`, so entities already annotated for JPA work without any changes (and without RaveSQL depending on JPA). If both annotations show up, RaveSQL's own `@Column` headlines.
+- **No annotation, no change** — unannotated properties keep mapping by the classic convention (`created_at` → `createdAt`), even in classes that annotate other fields. Entities without any `@Column` behave exactly as before.
+- **Scanned once, cached forever** — the column mapping for each entity class is computed on first use and cached, so the reflection cost never repeats a beat.
 
 ---
 
@@ -555,10 +609,12 @@ Let's break down each method in RaveRepository, ensuring you know how to keep yo
 - **Example**:
 
     ```java
-    public int[] deactivateMultipleTracks(List<Integer> trackIds) {
-        return raveRepository.rawBatchUpdate("sql/deactivateTracks.sql", trackIds);
+    public int[] deactivateMultipleTracks(List<TrackDeactivation> deactivations) {
+        return raveRepository.rawBatchUpdate("sql/deactivateTracks.sql", deactivations);
     }
     ```
+
+    Each element of the list is a parameter object whose properties bind the named parameters in the SQL — one object per beat in the batch.
 
 ---
 

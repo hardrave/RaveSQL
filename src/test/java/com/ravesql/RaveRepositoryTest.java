@@ -258,4 +258,40 @@ public class RaveRepositoryTest {
         assertEquals("Alice", results.get(0).getName());
     }
 
+    // Repository-style helper: @SqlPath on a method WITH parameters (the documented usage)
+    @SqlPath("sql/select_by_id.sql")
+    private TestEntity findById(int id) {
+        return repository.queryForObject(TestEntity.class, "id", id);
+    }
+
+    // Overload with a different signature and SQL file, to prove overloads resolve independently
+    @SqlPath("sql/select_by_name.sql")
+    private List<TestEntity> findBy(String name) {
+        return repository.query(TestEntity.class, "name", name);
+    }
+
+    @SqlPath("sql/select_all.sql")
+    private List<TestEntity> findBy() {
+        return repository.query(TestEntity.class);
+    }
+
+    // Regression test: @SqlPath resolution must work when the annotated caller takes parameters
+    @Test
+    public void testSqlPathOnParameterizedMethod() {
+        TestEntity result = findById(1);
+        assertNotNull(result);
+        assertEquals("Alice", result.getName());
+    }
+
+    // Regression test: overloaded @SqlPath methods must each resolve their own SQL path
+    @Test
+    public void testSqlPathOnOverloadedMethods() {
+        List<TestEntity> byName = findBy("Bob");
+        assertEquals(1, byName.size());
+        assertEquals("Bob", byName.get(0).getName());
+
+        List<TestEntity> all = findBy();
+        assertEquals(2, all.size());
+    }
+
 }

@@ -1,9 +1,7 @@
 package com.ravesql;
 
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.RowMapper;
-import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 
@@ -397,7 +395,7 @@ public class RaveRepository {
         String sqlPath = getSqlPathFromCaller();
         String sql = readSqlFromFile(sqlPath);
         SqlParameterSource[] batchParams = paramObjects.stream()
-                .map(BeanPropertySqlParameterSource::new)
+                .map(ColumnMappings::beanParameterSource)
                 .toArray(SqlParameterSource[]::new);
         return jdbcTemplate.batchUpdate(sql, batchParams);
     }
@@ -416,7 +414,7 @@ public class RaveRepository {
     public int[] rawBatchUpdate(String sqlPath, List<?> paramObjects) {
         String sql = readSqlFromFile(sqlPath);
         SqlParameterSource[] batchParams = paramObjects.stream()
-                .map(BeanPropertySqlParameterSource::new)
+                .map(ColumnMappings::beanParameterSource)
                 .toArray(SqlParameterSource[]::new);
         return jdbcTemplate.batchUpdate(sql, batchParams);
     }
@@ -492,28 +490,28 @@ public class RaveRepository {
     private String getSqlPathFromCaller() {
         return StackWalker.getInstance(StackWalker.Option.RETAIN_CLASS_REFERENCE)
                 .walk(frames -> frames
-                        .filter(frame -> {
-                            Method method;
-                            try {
-                                method = frame.getDeclaringClass().getDeclaredMethod(frame.getMethodName());
-                                return method.isAnnotationPresent(SqlPath.class);
-                            } catch (NoSuchMethodException e) {
-                                return false;
-                            }
-                        })
+                        .map(RaveRepository::resolveCallerMethod)
+                        .filter(method -> method != null && method.isAnnotationPresent(SqlPath.class))
                         .findFirst()
-                        .map(frame -> {
-                            Method method;
-                            try {
-                                method = frame.getDeclaringClass().getDeclaredMethod(frame.getMethodName());
-                                SqlPath sqlPathAnnotation = method.getAnnotation(SqlPath.class);
-                                return sqlPathAnnotation.value();
-                            } catch (NoSuchMethodException e) {
-                                throw new SqlRepositoryException("Unable to retrieve SQL path from caller method.", e);
-                            }
-                        })
+                        .map(method -> method.getAnnotation(SqlPath.class).value())
                         .orElseThrow(() -> new SqlRepositoryException("No @SqlPath annotation found on calling method."))
                 );
+    }
+
+    /**
+     * Resolves the exact {@link Method} behind a stack frame, using the frame's
+     * {@code MethodType} so that parameterized and overloaded methods are matched correctly.
+     *
+     * @param frame the stack frame to resolve
+     * @return the resolved method, or {@code null} if it cannot be resolved (e.g. synthetic frames)
+     */
+    private static Method resolveCallerMethod(StackWalker.StackFrame frame) {
+        try {
+            return frame.getDeclaringClass()
+                    .getDeclaredMethod(frame.getMethodName(), frame.getMethodType().parameterArray());
+        } catch (NoSuchMethodException e) {
+            return null;
+        }
     }
 
     /**
@@ -544,7 +542,7 @@ public class RaveRepository {
             }
             return paramSource;
         } else {
-            return new BeanPropertySqlParameterSource(params);
+            return ColumnMappings.beanParameterSource(params);
         }
     }
 
@@ -563,7 +561,7 @@ public class RaveRepository {
      */
     private <T> List<T> queryInternal(String sql, Class<T> type, Object params) {
         SqlParameterSource paramSource = buildSqlParameterSource(params);
-        RowMapper<T> rowMapper = BeanPropertyRowMapper.newInstance(type);
+        RowMapper<T> rowMapper = ColumnMappings.rowMapper(type);
         return jdbcTemplate.query(sql, paramSource, rowMapper);
     }
 
@@ -581,7 +579,7 @@ public class RaveRepository {
      */
     private <T> T queryForObjectInternal(String sql, Class<T> type, Object params) {
         SqlParameterSource paramSource = buildSqlParameterSource(params);
-        RowMapper<T> rowMapper = BeanPropertyRowMapper.newInstance(type);
+        RowMapper<T> rowMapper = ColumnMappings.rowMapper(type);
         return jdbcTemplate.queryForObject(sql, paramSource, rowMapper);
     }
 
